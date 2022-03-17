@@ -39,13 +39,13 @@ public class Edge {
 			public static int fluxo(List<Edge>[] grafo, int s, int t) {
 				//fluxo 
 				int fluxo = 0;
-				//seta uma lista q
+				//seta uma lista Fila
 				int[] Fila = new int[grafo.length];
 				//loop para rodar até finalizar o processo
 				while (1 == 1) {
-					//incializa qt
+					//incializa o contador
 					int count = 0;
-					//q recebe o primeiro elemento
+					//Fila recebe o primeiro elemento
 					Fila[count++] = s;
 					//lista de arestas/caminho
 					Edge[] caminho = new Edge[grafo.length];
@@ -57,7 +57,7 @@ public class Edge {
 							if (caminho[e.t] == null && e.cap > e.f) {
 								//caminho recebe a aresta
 								caminho[e.t] = e;
-								//q o destino da aresta
+								//Fila recebe o destino da aresta
 								Fila[count++] = e.t;
 							}
 						}
@@ -101,32 +101,24 @@ public class Edge {
 			public static List<Edge>[] ler(File file) throws IOException {
 				// Chama o método para colocar o arquivo em uma lista
 				List l = readFileInList(file.getPath());
-					
 				// Variavel para conta de Vertices(numero de linhas até chegar nas arestas - 1)
 				int lineEdges = -1;
-					
 				// Coloca a primeira linha em uma string
 				String strFor1 = (String) l.get(0);
 				// Manipula a string para pegar o valor de Vertices
 				lineEdges = Integer.parseInt(strFor1.substring(10));
-				
 				// Array para as Vertices
 				String[] Vert = new String [lineEdges];
-				
 				// Calculo para verificar o numero de Arestas
 				int calcAr = l.size() - lineEdges-2;
-				
 				// Array para os Pesos
 				float[] Pesos = new float[calcAr];
-				
 				// MultArray para as Arestas
 				int[][] Arest = new int[calcAr][4];
-					
 				// Padrão utilizado para pegar os valores das arestas e pesos
 				Pattern p = Pattern.compile("[0-9]*\\.?[0-9]+");
 				// Lista que recebe os valores dos pesos e arestas
-				List<Float> arestasPesosList = new ArrayList<Float>();
-					
+				List<Float> arestasPesosList = new ArrayList<Float>();		
 				// Percorre as linhas do arquivo que possuem as arestas e pesos
 				for (int i = lineEdges+1; i < l.size(); i++) {
 					// Verifica o pardrao com o texto
@@ -136,8 +128,7 @@ public class Edge {
 						// Adiciona a lista os valores
 						arestasPesosList.add(Float.parseFloat(m.group()));
 					}
-				}
-					
+				}	
 				// Percorre o numero de vertices vezes
 				for (int i = 0; i < lineEdges; i++) {
 					// Como a lista de valores possue tanto pesos quanto arestas, utiliza lógica de PA
@@ -171,8 +162,7 @@ public class Edge {
 					str1 = str1.substring(1);
 					// Coloca o rotulo da vertice no array
 					Vert[i] = str1;
-				}
-					
+				}	
 				// Percorre desde o numero de vertices até o numero de arestas
 				for (int i = lineEdges; i < calcAr; i++) {
 					// Como a lista de valores possue tanto pesos quanto arestas, utiliza lógica de PA
